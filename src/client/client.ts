@@ -94,6 +94,7 @@ import Stats from 'three/examples/jsm/libs/stats.module'
 import { GUI } from 'dat.gui'
 
 const scene = new THREE.Scene()
+scene.add(new THREE.AxesHelper(5))
 
 const camera = new THREE.PerspectiveCamera(
     75,
@@ -132,13 +133,26 @@ document.body.appendChild(stats.dom)
 
 const gui = new GUI()
 const cubeFolder = gui.addFolder("Cube")
-cubeFolder.add(cube.rotation, "x", 0, Math.PI * 2)
-cubeFolder.add(cube.rotation, "y", 0, Math.PI * 2)
-cubeFolder.add(cube.rotation, "z", 0, Math.PI * 2)
-cubeFolder.open() // default는 열린상태
-const cameraFolder = gui.addFolder("Camera")
-cameraFolder.add(camera.position, "z", 0 ,20)
-cameraFolder.open() // default는 열린상태
+const cubeRotationFolder = cubeFolder.addFolder("Rotation")
+cubeRotationFolder.add(cube.rotation, "x", 0, Math.PI * 2)
+cubeRotationFolder.add(cube.rotation, "y", 0, Math.PI * 2)
+cubeRotationFolder.add(cube.rotation, "z", 0, Math.PI * 2)
+cubeRotationFolder.open() // default는 열린상태
+const cubePositionFolder = cubeFolder.addFolder("Position")
+cubePositionFolder.add(cube.position, "x", -10, 10, 2)
+cubePositionFolder.add(cube.position, "y", -10, 10, 2)
+cubePositionFolder.add(cube.position, "z", -10, 10, 2) //2는 step
+cubePositionFolder.open() // default는 열린상태
+const cubeScaleFolder = cubeFolder.addFolder("Scale")
+cubeScaleFolder.add(cube.scale, "x", -5, 5)
+cubeScaleFolder.add(cube.scale, "y", -5, 5)
+cubeScaleFolder.add(cube.scale, "z", -5, 5)
+cubeScaleFolder.open() // default는 열린상태
+cubeFolder.open()
+cubeFolder.add(cube, "visible")
+// const cameraFolder = gui.addFolder("Camera")
+// cameraFolder.add(camera.position, "z", 0 ,20)
+// cameraFolder.open() // default는 열린상태
 
 
 function animate() {
